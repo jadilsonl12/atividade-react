@@ -1,16 +1,18 @@
 import Image from "next/image";
 import  { Header } from "@/components/Header"
 import { Section } from "@/components/Section";
+import { TableDetails } from "@/components/Table";
 
 export default function Home() {
   return (
   <div className="font-sans">
-      <header className="bg-[#5429CC] w-full h-[212px] pt-9">
+      <header className="bg-header w-full h-[212px] pt-9">
         <Header/>
       </header>
-      <main className="bg-gray-200 w-full"> 
+      <section className="bg-gray-200 w-full h-[705px]"> 
         <Section/>
-      </main>
+        <TableDetails/>
+      </section>
   </div>
   );
 }

@@ -1,8 +1,8 @@
-import { Card, CardGreen } from "../Card";
+import { Card, CardGreen } from "@/components/Card";
 
 export function Section() {
     return (
-        <main className="h-[705px] max-w-[1128px] m-auto">
+        <main className="max-w-[1128px] m-auto pt-9">
             <div className="grid grid-cols-3 gap-8">
                 <Card
                     title="Entradas"

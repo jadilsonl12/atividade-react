@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
+import  ModalTailwind from '../ModalTailwind';
 
 const BasicModal = dynamic(() => import('../Modal/index'), { ssr: false });
 
@@ -14,7 +15,7 @@ const ButtonNewTrasaction: React.FC = () => {
     return (
       <div>
         <button className="px-6 py-3 bg-button text-sm text-white rounded-md hover:opacity-80" onClick={handleOpen}>Nova Transação</button>
-        <BasicModal open={open} handleClose={handleClose} />
+        <ModalTailwind open={open} handleClose={handleClose} />
       </div>
     );
   };

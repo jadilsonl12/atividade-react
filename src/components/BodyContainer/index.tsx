@@ -1,5 +1,13 @@
-export function BodyContainer() {
+import React from "react";
+
+export interface IBodyContainerProps {
+    children: React.ReactNode;
+}
+
+export function BodyContainer({children}: IBodyContainerProps) {
     return (
-        <div className="bg-red"></div>
+        <div className="mx-auto max-w-[1120px] -mt-16">
+            {children}
+        </div>
     )
 }

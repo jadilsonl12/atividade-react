@@ -8,23 +8,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       fontFamily: {
         sans: ['var(--font-poppins)'],
         mono: ['var(--font-poppins)'],
       },
       colors: {
         "title": "var(--title)",
-        "income": "var(--income)",
-        "outcome": "var(--outcome)",
+        "income": "hsla(var(--income))",
+        "outcome": "hsla(var(--outcome))",
         "header": "var(--header)",
         "table-header": "var(--table-header)",
         "income-value": "var(--income-value)",        
         "button" : "var(--button)",
+        "background": "var(--background)",
+        "modal-background": "var(--modal-background)",
+        "input": "var(--input)",
+        "input-border": "var(--input-border)",
+        "transaction-border": "var(--transaction-border)",
       },
     },
   },

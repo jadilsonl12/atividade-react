@@ -1,24 +1,33 @@
-import ComponentsCard from "@/interfaces/componentsCard"
+import { formatCurrency } from "@/utils";
+import Image from "next/image";
 
-export function Card(components: ComponentsCard) {
-    return (
-        <div className="w-[352px] h-[136px] bg-white rounded-lg">
-            <div className="pr-6 pl-8 pt-6">
-                <span className="flex justify-between text-sm">{components.title} <img src={components.icon} alt="Logo Entradas"/></span>
-                <span className="text-[36px]">{components.valor}</span>
-            </div>
-            
-        </div>
-    )
+export interface ICardProps {
+    title: string;
+    value: number;
+    type: 'income' | 'outcome' | 'total';
 }
 
-export function CardGreen(components: ComponentsCard) {
+export function Card({title, value, type}: ICardProps) {
+    const icon = type === 'income' 
+        ? '/images/income.png' 
+        : type === 'outcome' 
+          ? '/images/outcome.png' 
+          : '/images/total.png';
+    const bgColor = type === 'income' || type === 'outcome' 
+        ? 'bg-white' 
+        : value > 0
+        ? 'bg-income'
+        : 'bg-outcome';
+    const textColor = type === 'income' || type === 'outcome' 
+        ? 'text-title' 
+        : 'text-white'
     return (
-        <div className="w-[352px] h-[136px] bg-income-value rounded-lg text-white">
-            <div className="pr-6 pl-8 pt-6">
-                <span className="flex justify-between text-sm">{components.title} <img src={components.icon} alt="Logo Entradas"/></span>
-                <span className="text-[36px]">{components.valor}</span>
+        <div className={`flex flex-col w-[352px] h-[136px] rounded-md ${bgColor} `}>
+            <div className="flex flew-row justify-between align-middle items-center px-8 pt-6 pb-2">
+                <span className={`text-base font-normal leading-4 ${textColor}`}>{title}</span>
+                <Image src={icon} alt={title} width={32} height={32} />
             </div>
+            <div className={`text-4xl ${textColor} px-8`}>{formatCurrency(value)}</div>
         </div>
     )
 }

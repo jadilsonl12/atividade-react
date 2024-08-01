@@ -7,17 +7,17 @@ export function Section() {
                 <Card
                     title="Entradas"
                     valor="R$ 17.400,00"
-                    icon="/images/Entradas.png"
+                    icon="/images/entradas.png"
                 />
                  <Card
                     title="Saídas"
                     valor="R$ 1.259,00"
-                    icon="/images/Saídas.png"
+                    icon="/images/saidas.png"
                 />
                  <CardGreen
                     title="Total"
                     valor="R$ 16.141,00"
-                    icon="/images/Total.png"
+                    icon="/images/total.png"
                 />
             </div>
         </main>

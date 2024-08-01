@@ -1,20 +1,72 @@
-import Image from "next/image";
+"use client"
 import  { Header } from "@/components/Header"
-import { Section } from "@/components/Section";
-import { TableDetails } from "@/components/Table";
+import { Table } from "@/components/Table";
+import { ITransaction } from "@/types/index";
+import { use, useEffect, useState } from "react";
+import { BodyContainer } from "@/components/BodyContainer";
+import { CardContainer } from "@/components/CardContainer";
+import { FormModal } from "@/components/FormModal";
+
+const oldTransactions: ITransaction[] = [
+  {
+    title: "Desenvolvimento de site",
+    price: 1200,
+    category: "Desenvolvimento",
+    data: new Date(),
+    type: "income"
+  },
+  {
+    title: "Hamburguer",
+    price: 50,
+    category: "Alimentação",
+    data: new Date(),
+    type: "outcome"
+  }
+]
+
+export interface ITotal {
+  totalIncome: number 
+  totalOutcome: number
+  total: number
+}
 
 export default function Home() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [transactions, setTransactions] = useState<ITransaction[]>(oldTransactions);
+  const [totalTransactions, setTotalTransactions] = useState<ITotal>({totalIncome: 0, totalOutcome: 0, total: 0})
+
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false)
+
+  const handleAddTransaction = (transaction: ITransaction) => {
+    setTransactions([...transactions, transaction])
+  }
+
+  useEffect(() => {
+    const totals = transactions.reduce((acc, transaction) => {
+      if (transaction.type === 'income') {
+        acc.totalIncome += transaction.price;
+        acc.total += transaction.price;
+      } else if (transaction.type === 'outcome') {
+        acc.totalOutcome += transaction.price;
+        acc.total -= transaction.price;
+      }
+      return acc;
+    }, { totalIncome: 0, totalOutcome: 0, total: 0 });
+    setTotalTransactions(totals)
+   
+  },[transactions] )
+
   return (
-  <div className="font-sans">
-      <header className="bg-header w-full h-[212px] pt-9 absolute">
-        <Header/>
-      </header>
-      <section className="bg-gray-200 h-full min-h-screen pt-28"> 
-        <div className="relative">
-          <Section/>
-          <TableDetails/>
-        </div>
-      </section>
+  <div className="bg-background h-full min-h-screen">
+      <Header openModal={openModal} />
+      <BodyContainer>
+        <CardContainer totals={totalTransactions} />    
+        <Table data={transactions} />
+    </BodyContainer>          
+    {isModalOpen && (<FormModal formTitle="Cadastro de Transação" closeModal={closeModal} AddTransaction={handleAddTransaction} />)}
   </div>
   );
 }

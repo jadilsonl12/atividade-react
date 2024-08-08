@@ -1,16 +1,14 @@
-import type { Metadata } from "next";
+"use client"
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient()
 
 const poppins = Poppins({
-  weight: ["500", "600", "700", "800", "900"], 
-  subsets: ["latin"] 
-});
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"]}
+);
 
-export const metadata: Metadata = {
-  title: "Dt Money",
-  description: "Application Dt Money",
-};
 
 export default function RootLayout({
   children,
@@ -18,8 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <body className={poppins.className}>{children}</body>
+    <html lang="en">
+      <body className={poppins.className}>
+      <QueryClientProvider client={queryClient}>
+         {children}
+      </QueryClientProvider>
+      </body>
     </html>
   );
 }

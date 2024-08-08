@@ -1,4 +1,4 @@
-import { ITransaction } from "@/types/index";
+import { ITransaction } from "@/types/transaction";
 import { formatCurrency, formatDate } from "@/utils";
 
 export interface ITableProps {
@@ -24,7 +24,7 @@ export function Table({data}: ITableProps) {
                     <td className="px-4 py-4 whitespace-nowrap text-title">{item.title}</td>
                     <td className={`px-4 py-4 whitespace-nowrap text-right ${item.type === 'income'? "text-income-value" : "text-outcome"}`}>{formatCurrency(item.price)}</td>
                     <td className="px-4 py-4 whitespace-nowrap">{item.category}</td>
-                    <td className="px-4 py-4 whitespace-nowrap">{formatDate(item.data)}</td>         
+                    <td className="px-4 py-4 whitespace-nowrap">{formatDate(new Date(item.data))}</td>         
                 </tr>
             ))}
         </tbody>
